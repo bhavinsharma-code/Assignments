@@ -2,7 +2,7 @@
 
 ## Description
 
-This assignment involved designing and querying a relational database for a bookstore. The schema includes four interconnected tables: `Authors`, `Books`, `Customers`, and `Orders`. The goal was to write a variety of SQL queries to extract, analyze, and manipulate data.
+The schema includes four interconnected tables: `Authors`, `Books`, `Customers`, and `Orders`.
 
 ## Database Structure
 
