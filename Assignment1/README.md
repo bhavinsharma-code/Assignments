@@ -13,13 +13,9 @@ This assignment involved designing and querying a relational database for a book
 
 ## What I Learned
 
-Through this assignment, I gained practical experience in:
-
 - **Basic SQL Queries**: Selecting, filtering, and sorting data.
 - **JOINs**: Combining data from multiple tables using `INNER JOIN`, `LEFT JOIN`.
 - **Aggregations**: Using functions like `SUM()`, `AVG()`, and `COUNT()` to compute totals and averages.
 - **Grouping & Filtering**: Working with `GROUP BY` and `HAVING` to analyze grouped data.
 - **Subqueries**: Writing nested queries for more advanced data retrieval.
-- **Data Analysis**: Answering real-world business questions like top-selling books, total revenue, and customer behavior.
-- **Data Integrity**: Identifying records that meet or fail certain conditions (e.g. books not ordered).
 
