@@ -4,14 +4,14 @@
 
 This assignment involved designing and querying a relational database for a bookstore. The schema includes four interconnected tables: `Authors`, `Books`, `Customers`, and `Orders`. The goal was to write a variety of SQL queries to extract, analyze, and manipulate data.
 
-## 📂 Database Structure
+## Database Structure
 
 - **Authors**: Contains author information such as name, country, and birth year.
 - **Books**: Contains book details including title, genre, price, stock, and links to authors.
 - **Customers**: Stores customer information like name, email, join date, and country.
 - **Orders**: Tracks book purchases, with details like customer, book, quantity, and total price.
 
-## 🔍 What I Learned
+## What I Learned
 
 Through this assignment, I gained practical experience in:
 
