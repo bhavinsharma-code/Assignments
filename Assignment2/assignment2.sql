@@ -1,0 +1,146 @@
+customers
++------------+---------------+---------------------+------------+----------------+
+| customerid | name          | email               | joindate   | country        |
++------------+---------------+---------------------+------------+----------------+
+|          1 | Alice Johnson | alice@example.com   | 2023-01-15 | United States  |
+|          2 | Bob Smith     | bob@example.com     | 2023-02-20 | Canada         |
+|          3 | Charlie Brown | charlie@example.com | 2023-03-05 | United Kingdom |
++------------+---------------+---------------------+------------+----------------+
+
+orders
++---------+------------+------------+-------------+
+| orderid | customerid | orderdate  | totalamount |
++---------+------------+------------+-------------+
+|       1 |          1 | 2023-03-10 |       51.98 |
+|       2 |          2 | 2023-03-15 |       79.99 |
+|       3 |          3 | 2023-03-20 |       16.47 |
++---------+------------+------------+-------------+
+
+products
++-----------+----------------------+-------------+-------+-------+
+| productid | name                 | category    | price | stock |
++-----------+----------------------+-------------+-------+-------+
+|         1 | Wireless Mouse       | Electronics | 25.99 |   150 |
+|         2 | Bluetooth Headphones | Electronics | 79.99 |   100 |
+|         3 | Notebook             | Stationery  |  5.49 |   300 |
++-----------+----------------------+-------------+-------+-------+
+
+reviews
++----------+-----------+------------+--------+-----------------------------------------------------+------------+
+| reviewid | productid | customerid | rating | reviewtext                                          | reviewdate |
++----------+-----------+------------+--------+-----------------------------------------------------+------------+
+|        1 |         1 |          1 |      5 | Great product! Works perfectly.                     | 2023-03-12 |
+|        2 |         2 |          2 |      4 | Good sound quality, but a bit pricey.               | 2023-03-18 |
+|        3 |         3 |          3 |      3 | Decent notebook, but paper quality could be better. | 2023-03-22 |
++----------+-----------+------------+--------+-----------------------------------------------------+------------+
+
+shipping
++------------+---------+--------------+--------------+------------+
+| shippingid | orderid | shippingdate | deliverydate | status     |
++------------+---------+--------------+--------------+------------+
+|          1 |       1 | 2023-03-11   | 2023-03-14   | Delivered  |
+|          2 |       2 | 2023-03-16   | 2023-03-20   | Delivered  |
+|          3 |       3 | 2023-03-21   | NULL         | In Transit |
++------------+---------+--------------+--------------+------------+
+
+Basic Queries
+1. Retrieve the names and emails of all customers.
+select name, email from customers;
+
+2. List all products along with their categories and prices.
+select name, category, price from products;
+
+3. Find the total number of products available in the 'Electronics' category.
+select count(*) as noof_products, category 
+    -> from products
+    -> where category = 'Electronics';
+
+4. Display all orders placed by customers from the 'United States.'
+select o.orderid, o.customerid, c.name as customername, o.orderdate, o.totalamount
+    -> from orders as o
+    -> join customers as c on o.customerid = c.customerid
+    -> where c.country = 'United States';
+
+
+Intermediate Queries
+5. Calculate the total revenue generated from all orders.
+select sum(totalamount) as revenue 
+    -> from orders;
+
+6. Find the name of the customer who placed the order with the highest total amount.
+select c.name as customername, o.totalamount as highest_order_amount
+    -> from orders as o
+    -> join customers as c on o.customerid = c.customerid
+    -> order by o.totalamount DESC
+    -> limit 1;
+
+7. Retrieve all products that have less than 50 units in stock.
+select * from products
+    -> where stock < 50;
+
+8. List all reviews with ratings of 4 or higher.
+select * from reviews 
+    -> where rating >= 4;
+
+Joins
+9. Write a query to display all orders along with the customer name and email.
+select o.orderid, o.customerid, c.name as customername, c.email, o.orderdate, o.totalamount
+    -> from orders as o
+    -> join customers as c on o.customerid = c.customerid;
+
+10. List all reviews along with the product name and customer name.
+select r.reviewid, r.productid, p.name as productname, r.customerid, c.name as customername, r.rating, r.reviewtext 
+    -> from reviews as r 
+    -> left join products as p on r.productid = p.productid
+    -> join customers as c on r.customerid = c.customerid;
+Aggregations
+11. Calculate the average rating for each product.
+select p.name as productname, AVG(r.rating) as avg_rating
+    -> from reviews as r
+    -> join products as p on r.productid = p.productid
+    -> group by r.productid;
+
+12. Find the total revenue generated by each product category.
+
+13. Determine the country with the highest number of customers.
+select count(*) as total_customer, country
+    -> from customers
+    -> group by country
+    -> having count(*) = (select max(count_by_country)
+    -> from (select country, count(*) as count_by_country
+    -> from customers
+    -> group by country) as counts
+    -> );
+
+Filtering
+14. Retrieve all orders placed after March 1, 2023.
+select * from orders 
+    -> where orderdate > 2023-03-01;
+
+15. Display all shipments that are still 'In Transit.'
+select * from shipping 
+    -> where status = 'In Transit';
+    
+Advanced Queries
+16. Identify the top-rated product based on average rating.
+select p.name as productname, AVG(r.rating) as avg_rating
+    -> from reviews as r
+    -> join products as p on r.productid = p.productid
+    -> group by r.productid
+    -> order by avg_rating DESC
+    -> limit 1;
+
+17. List all customers who have written at least one review.
+select r.customerid, c.name as customername
+    -> from reviews as r
+    -> join customers as c on r.customerid = c.customerid;
+
+18. Find all products that have been purchased but never reviewed.
+select p.productid, p.name as productname
+    -> from products p
+    -> left join reviews as r on p.productid = r.productid
+    -> where r.reviewid is null;
+    
+Subqueries
+19. Write a query to find the product with the highest total sales (quantity * price)
+20. Retrieve all products that have not been purchased yet.
