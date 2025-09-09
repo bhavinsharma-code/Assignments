@@ -1,11 +1,11 @@
-# 🍜 Danny's Diner SQL Case Study
+# Danny's Diner SQL Case Study
 
-## 📋 Description
+## Description
 
 The schema contains three interconnected tables: `sales`, `menu`, and `members`.
 
 
-## 🗃️ Database Structure
+## Database Structure
 
 - **sales**  
   Tracks each customer's purchase history with columns:
@@ -26,7 +26,7 @@ The schema contains three interconnected tables: `sales`, `menu`, and `members`.
 
 ---
 
-## ✅ What I Learned
+## What I Learned
 
 - **Basic SQL Queries**: Selecting, filtering, and sorting rows.
 - **JOINs**: Using `INNER JOIN` to combine tables based on keys.
@@ -36,3 +36,4 @@ The schema contains three interconnected tables: `sales`, `menu`, and `members`.
 - **CASE Statements**: Applying conditional logic for calculating points.
 - **Subqueries**: Writing nested queries for more complex filtering.
 - **Date Functions**: Using `BETWEEN`, `DATE_ADD` to work with date ranges.
+
